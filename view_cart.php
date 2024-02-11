@@ -61,13 +61,14 @@
 						$total = 0;
 						if(!empty($_SESSION['cart'])){
 							// Connection parameters
-							$host        = "host=127.0.0.1";
-							$port        = "port=5432";
-							$dbname      = "dbname=your_database_name";
-							$credentials = "user=your_username password=your_password";
+							$host = 'ec2-52-54-200-216.compute-1.amazonaws.com';
+							$database = 'dd6lav3cfgc4im';
+							$user = 'fzqodqspncqlth';
+							$password = '822f15786751cd2dcac0646c6fee43a50d56f215812fc9034ab77b9f9c7a4e4d';
+							$port = '5432';
 
 							// Establishing a connection
-							$db = pg_connect( "$host $port $dbname $credentials" );
+							$db = pg_connect( "$host $database $user $password $port" );
 						
 							//create array of initial qty which is 1
  							$index = 0;
