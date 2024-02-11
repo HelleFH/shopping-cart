@@ -56,22 +56,51 @@
 					<th>Subtotal</th>
 				</thead>
 				<tbody>
-					<?php
-						//initialize total
-						$total = 0;
-						if(!empty($_SESSION['cart'])){
-						//connection
-						$conn = new mysqli('ec2-52-5-167-89.compute-1.amazonaws.com', 'ulyilmwirlipup', 'ba51cd86ed18e205adecbc1797f6f946ee147e3a49fc666b1b185c4daa29d4a2
-						', 'daqfcukefrq54k');
-						//create array of initail qty which is 1
- 						$index = 0;
- 						if(!isset($_SESSION['qty_array'])){
- 							$_SESSION['qty_array'] = array_fill(0, count($_SESSION['cart']), 1);
- 						}
-						$sql = "SELECT * FROM products WHERE id IN (".implode(',',$_SESSION['cart']).")";
-						$query = $conn->query($sql);
-							while($row = $query->fetch_assoc()){
-								?>
+				<?php
+// Initialize total
+$total = 0;
+if (!empty($_SESSION['cart'])) {
+    // Database connection parameters
+    $host = 'ec2-52-5-167-89.compute-1.amazonaws.com';
+    $user = 'ulyilmwirlipup';
+    $password = 'ba51cd86ed18e205adecbc1797f6f946ee147e3a49fc666b1b185c4daa29d4a2';
+    $database = 'daqfcukefrq54k';
+
+    // Create array of initial qty which is 1
+    $index = 0;
+    if (!isset($_SESSION['qty_array'])) {
+        $_SESSION['qty_array'] = array_fill(0, count($_SESSION['cart']), 1);
+    }
+
+    // Connection
+    $conn = new mysqli($host, $user, $password, $database);
+
+    // SQL to select products
+    $sql = "SELECT * FROM products WHERE id IN (" . implode(',', $_SESSION['cart']) . ")";
+    $query = $conn->query($sql);
+
+    while ($row = $query->fetch_assoc()) {
+        // Process each product
+        ?>
+        <!-- Your HTML/PHP code to display products goes here -->
+        <!-- Example: -->
+        <div class="product">
+            <h2><?php echo $row['name']; ?></h2>
+            <p>Price: <?php echo $row['price']; ?></p>
+            <!-- Add more details if needed -->
+        </div>
+        <?php
+
+        // Calculate total
+        $total += $row['price'] * $_SESSION['qty_array'][$index];
+        $index++;
+    }
+
+    // Close connection
+    $conn->close();
+}
+?>
+
 								<tr>
 									<td>
 										<a href="delete_item.php?id=<?php echo $row['id']; ?>&index=<?php echo $index; ?>" class="btn btn-danger btn-sm"><span class="glyphicon glyphicon-trash"></span></a>

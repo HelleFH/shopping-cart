@@ -74,11 +74,14 @@ unset($_SESSION['qty_array']);
         //end info message
         //fetch our products	
         //connection
-        $dsn = 'pgsql:host=ec2-52-5-167-89.compute-1.amazonaws.com;dbname=daqfcukefrq54k';
-        $user = 'ulyilmwirlipup';
-        $password = 'ba51cd86ed18e205adecbc1797f6f946ee147e3a49fc666b1b185c4daa29d4a2';
+        $host = 'ec2-52-54-200-216.compute-1.amazonaws.com';
+        $database = 'dd6lav3cfgc4im';
+        $user = 'fzqodqspncqlth';
+        $password = '822f15786751cd2dcac0646c6fee43a50d56f215812fc9034ab77b9f9c7a4e4d';
+        $port = '5432';
 
         try {
+            $dsn = "pgsql:host=$host;port=$port;dbname=$database";
             $pdo = new PDO($dsn, $user, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
