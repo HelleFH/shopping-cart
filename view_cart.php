@@ -1,5 +1,20 @@
 <?php
 session_start();
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Check if the form was submitted
+    if(isset($_POST['save'])){
+        // Loop through the indexes
+        foreach($_POST['indexes'] as $key){
+            // Update the quantity in the session
+            $_SESSION['qty_array'][$key] = $_POST['qty_'.$key];
+        }
+        // Set a success message
+        $_SESSION['message'] = 'Cart updated successfully';
+        // Redirect back to the cart page
+        header('location: view_cart.php');
+        exit; // Make sure to exit after redirecting
+    }
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,13 +77,12 @@ session_start();
                     <?php echo $_SESSION['message']; ?>
                 </div>
             <?php
-                // Unset session message
+                // Unset session message after displaying
                 unset($_SESSION['message']);
             }
 
             ?>
-            <a class="back-button" href="index.php"><i class="fas fa-arrow-left"></i>
-                Back</a>
+            <a class="back-button" href="index.php"><i class="fas fa-arrow-left"></i> Back</a>
             <form method="POST" action="">
                 <table>
                     <h2>Cart Details</h2>
@@ -82,11 +96,9 @@ session_start();
                     </thead>
                     <tbody>
                         <?php
-                        //initialize total
+                        // Initialize total
                         $total = 0;
                         if (!empty($_SESSION['cart'])) {
-                            //connection
-
                             // Database connection parameters
                             $host = 'ec2-52-54-200-216.compute-1.amazonaws.com';
                             $database = 'dd6lav3cfgc4im';
@@ -100,10 +112,7 @@ session_start();
                                 $pdo = new PDO($dsn, $user, $password);
                                 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-                                // Connection successful
-                                // echo "Connected successfully to PostgreSQL database!";
-
-                                //create array of initial qty which is 1
+                                // Create array of initial qty which is 1
                                 $index = 0;
                                 if (!isset($_SESSION['qty_array'])) {
                                     $_SESSION['qty_array'] = array_fill(0, count($_SESSION['cart']), 1);
