@@ -16,33 +16,8 @@ session_start();
 
 <body>
     <div class="container mx-auto">
-        <nav class="navbar bg-gray-800 p-4">
-            <style>
-                .navbar {
-                    margin-bottom: 2em;
-                    /* Add margin bottom to navbar */
-                }
-            </style>
-            <div class="container mx-auto flex justify-between items-center">
-                <a href="#" class="text-white text-2xl font-bold">Shopping Cart</a>
-                <ul class="flex items-center space-x-4">
-                    <li>
-                        <a href="view_cart.php" class="relative flex items-center text-white">
-                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs">
-                            <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
-                            </span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none"
-                                viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M17 11l2 2m0 0l-2 2m2-2H9.5a2.5 2.5 0 01-2.5-2.5c0-3 4-8 6-8s6 5 6 8a2.5 2.5 0 01-2.5 2.5zm-9 0V9a1 1 0 011-1h6a1 1 0 011 1v2">
-                                </path>
-                            </svg>
-                            <span class="ml-1">Cart</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <?php include 'nav.php'; ?>
+
         <?php
         // Info message
         if (isset($_SESSION['message'])) {
@@ -78,12 +53,54 @@ session_start();
             $sql = "SELECT * FROM products";
             $stmt = $pdo->query($sql);
 
-            echo '<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto space-x-4 px-6">';
+            echo '<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mx-auto space-x-4 px-6 pt-6 pb-4">';
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
+                <div id="lightbox" class="hidden fixed top-0 left-0 w-full bg-black bg-opacity-75 flex justify-center items-center">
+    <div class="relative">
+        <button id="closeBtn" class="absolute top-0 right-0 m-4 text-white text-2xl">&times;</button>
+        <img id="lightboxImg" src="" alt="Lightbox Image" class="max-w-full max-h-full">
+    </div>
+</div>
+<style>
+    /* Hide the lightbox by default */
+    #lightbox.hidden {
+        display: none;
+    }
+    #lightbox {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.75); /* Semi-transparent black background */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+    }
+    #lightboxContent {
+    }
+    /* Style for the lightbox image */
+    #lightboxImg {
+        max-width: 90%;
+        max-height: 90vh; 
+    }
+
+    /* Style for the close button */
+    #closeBtn {
+        cursor: pointer;
+        background: none;
+        border: none;
+        outline: none;
+    }
+</style>
+
                 <div class="bg-white shadow-md rounded-lg overflow-hidden flex justify-center py-4 px-2">
                     <div class="w-full max-w-xs">
-                    <img src="<?php echo $row['photo'] ?>" class="w-full h-48 object-cover object-center">
+                    <a href="#" onclick="openLightbox('<?php echo $row['photo']; ?>')">
+    <img src="<?php echo $row['photo']; ?>" class="w-full h-48 object-cover object-center">
+</a>
                         <div class="p-4 text-center">
                             <h4 class="font-semibold text-lg mb-2">
                                 <?php echo $row['name']; ?>
@@ -117,5 +134,21 @@ session_start();
                 }
             }, 2000);
         </script>
+        <script>
+    // Function to open the lightbox with the specified image URL
+    function openLightbox(imageUrl) {
+        document.getElementById('lightboxImg').src = imageUrl;
+        document.getElementById('lightbox').classList.remove('hidden');
+    }
+
+    // Function to close the lightbox
+    function closeLightbox() {
+        document.getElementById('lightbox').classList.add('hidden');
+    }
+
+    // Add event listener to close button
+    document.getElementById('closeBtn').addEventListener('click', closeLightbox);
+</script>
+
 
 </html>

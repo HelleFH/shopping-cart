@@ -1,43 +1,20 @@
-<style>
-    a,
-    a:visited {
-        text-decoration: none;
-        color: inherit;
-    }
+<nav class=" mt-0 bg-gray-600 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+            <a href="index.php" class="text-white text-2xl font-bold pl-4 hover:text-gray-300">Products</a>
+                <ul class="flex items-center space-x-4">
+                    <li>
+                        <a href="view_cart.php" class="relative flex items-center text-white">
+                          
 
-    .nav_menu {
-        list-style: none;
-        display: flex;
-        justify-content: flex-start;
-        padding: 1.5em;
-        padding-left: 5%;
-        background-color: #c2b5a8;
-    }
-
-    .nav_menu li:last-child {
-        margin-left: auto;
-    }
-
-    .nav_menu li {
-        padding-right: 2em;
-    }
-
-    .nav_menu li:hover {
-        font-weight: 600;
-    }
-</style>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-<div>
-    <nav>
-        <ul class="nav_menu">
-            <li>
-                <a href="index.php">Products</a>
-            </li>
-
-            <li>
-                <a href="view_cart.php"><i class="fa fa-shopping-cart" aria-hidden="true"></i>
-                    View Cart </a>
-            </li>
-    </nav>
-</div>
+                            <span class="ml-1 hover:text-gray-300">Cart</span>
+                            <span class=" top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs ml-2 hover:font-bold ">
+                                <?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+        <style>.hover\:font-bold:hover {
+    font-weight: bold;
+}</style>

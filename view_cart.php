@@ -3,11 +3,11 @@ session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the form was submitted
-    if(isset($_POST['save'])){
+    if (isset($_POST['save'])) {
         // Loop through the indexes
-        foreach($_POST['indexes'] as $key){
+        foreach ($_POST['indexes'] as $key) {
             // Update the quantity in the session
-            $_SESSION['qty_array'][$key] = $_POST['qty_'.$key];
+            $_SESSION['qty_array'][$key] = $_POST['qty_' . $key];
         }
         // Set a success message
         $_SESSION['message'] = 'Cart updated successfully';
@@ -25,18 +25,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <title>Shopping Cart using Session in PHP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 </head>
 
 <body>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         td {
             text-align: center;
         }
+
         @media (min-width: 768px) {
             form {
                 width: 80vw;
-                margin:0 auto;
+                margin: 0 auto;
             }
         }
 
@@ -47,33 +56,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             }
         }
     </style>
-  <div class="  w-screen">       
-     <nav class=" mt-0 bg-gray-800 p-4">
-            <div class="container mx-auto flex justify-between items-center">
-                <a href="#" class="text-white text-2xl font-bold">Shopping Cart</a>
-                <ul class="flex items-center space-x-4">
-                    <li>
-                        <a href="view_cart.php" class="relative flex items-center text-white">
-                            <span class="absolute top-0 right-0 bg-red-500 text-white rounded-full px-2 py-1 text-xs"><?php echo isset($_SESSION['cart']) ? count($_SESSION['cart']) : 0; ?>
-</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 11l2 2m0 0l-2 2m2-2H9.5a2.5 2.5 0 01-2.5-2.5c0-3 4-8 6-8s6 5 6 8a2.5 2.5 0 01-2.5 2.5zm-9 0V9a1 1 0 011-1h6a1 1 0 011 1v2"></path>
-                            </svg>
-                            <span class="ml-1">Cart</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </nav>
+    <div class="  w-screen">
+    <?php include 'nav.php'; ?>
+
         <?php
         if (isset($_SESSION['message'])) {
             ?>
             <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative" role="alert">
-                <span class="block sm:inline"><?php echo $_SESSION['message']; ?></span>
+                <span class="block sm:inline">
+                    <?php echo $_SESSION['message']; ?>
+                </span>
                 <span class="absolute top-0 bottom-0 right-0 px-4 py-3">
-                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                    <svg class="fill-current h-6 w-6 text-green-500" role="button" xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 20 20">
                         <title>Close</title>
-                        <path fill-rule="evenodd" d="M14.354 5.354a1 1 0 010 1.414L11.414 10l2.94 2.94a1 1 0 11-1.414 1.414L10 11.414l-2.94 2.94a1 1 0 01-1.414-1.414L8.586 10 5.646 7.06a1 1 0 111.414-1.414L10 8.586l2.94-2.94a1 1 0 011.414 0z" clip-rule="evenodd" />
+                        <path fill-rule="evenodd"
+                            d="M14.354 5.354a1 1 0 010 1.414L11.414 10l2.94 2.94a1 1 0 11-1.414 1.414L10 11.414l-2.94 2.94a1 1 0 01-1.414-1.414L8.586 10 5.646 7.06a1 1 0 111.414-1.414L10 8.586l2.94-2.94a1 1 0 011.414 0z"
+                            clip-rule="evenodd" />
                     </svg>
                 </span>
             </div>
@@ -83,7 +82,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
-        <a class="block mb-4 text-blue-500" href="index.php"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+<a class="block mb-4 ml-4 text-black-600 hover:text-green-600" href="index.php">
+    <i class="fa fa-chevron-left mr-2" aria-hidden="true"></i> Back
+</a>
+
         <form method="POST" action="">
             <table class="w-full border-collapse border border-gray-400">
                 <thead>
@@ -107,7 +109,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $user = 'fzqodqspncqlth';
                         $password = '822f15786751cd2dcac0646c6fee43a50d56f215812fc9034ab77b9f9c7a4e4d';
                         $port = '5432'; // PostgreSQL default port
-
+                    
                         try {
                             // Establishing the connection using PDO
                             $dsn = "pgsql:host=$host;port=$port;dbname=$database";
@@ -126,29 +128,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 <tr>
                                     <td class="border border-gray-400">
                                         <a href="delete_item.php?id=<?php echo $row['id']; ?>&index=<?php echo $index; ?>"><span><i
-                                                        class="fa fa-trash" aria-hidden="true"></i>
+                                                    class="fa fa-trash" aria-hidden="true"></i>
                                             </span></a>
                                     </td>
-                                    <td class="border border-gray-400"><img src="<?php echo $row['photo']; ?>" alt="Product Image" class="w-16 h-16 object-cover"></td>
-                                    <td class="border border-gray-400"><?php echo $row['name']; ?></td>
-                                    <td class="border border-gray-400">£<?php echo number_format($row['price'], 2); ?></td>
+                                    <td class="border border-gray-400"><img src="<?php echo $row['photo']; ?>" alt="Product Image"
+                                            class="w-16 h-16 object-cover"></td>
+                                    <td class="border border-gray-400">
+                                        <?php echo $row['name']; ?>
+                                    </td>
+                                    <td class="border border-gray-400">£
+                                        <?php echo number_format($row['price'], 2); ?>
+                                    </td>
                                     <input type="hidden" name="indexes[]" value="<?php echo $index; ?>">
                                     <td class="border border-gray-400">
-    <div class="border border-gray-400 inline-block px-2">
-        <input type="text" class="form-control w-12" style="text-align:center"
-                value="<?php echo $_SESSION['qty_array'][$index]; ?>"
-                name="qty_<?php echo $index; ?>">
-    </div>
-</td>
+                                        <div class="border border-gray-400 inline-block px-2">
+                                            <input type="text" class="form-control w-12" style="text-align:center"
+                                                value="<?php echo $_SESSION['qty_array'][$index]; ?>"
+                                                name="qty_<?php echo $index; ?>">
+                                        </div>
+                                    </td>
 
 
 
                                     <td class="border border-gray-400">
-                                    £<?php echo number_format($_SESSION['qty_array'][$index] * $row['price'], 2); ?>
+                                        £
+                                        <?php echo number_format($_SESSION['qty_array'][$index] * $row['price'], 2); ?>
                                     </td>
                                     <?php $total += $_SESSION['qty_array'][$index] * $row['price']; ?>
                                 </tr>
-                            <?php
+                                <?php
                                 $index++;
                             }
                         } catch (PDOException $e) {
@@ -160,19 +168,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         <tr>
                             <td colspan="6" class="text-center border border-gray-400">No Item in Cart</td>
                         </tr>
-                    <?php
+                        <?php
                     }
 
                     ?>
                     <tr>
-                    <td colspan="5" class="border border-gray-400 text-right pr-4"><b>Total</b></td>
-                        <td class="border border-gray-400"><b>£<?php echo number_format($total, 2); ?></b></td>
+                        <td colspan="5" class="border border-gray-400 text-right pr-4"><b>Total</b></td>
+                        <td class="border border-gray-400"><b>£
+                                <?php echo number_format($total, 2); ?>
+                            </b></td>
                     </tr>
                 </tbody>
             </table>
             <div class="mt-4 flex justify-end">
-                <button type="submit" name="save" class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Save Changes</button>
-                <a href="clear_cart.php" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 ml-4">Clear Cart</a>
+
+
+                <button type="submit" name="save"
+                    class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4">Save
+                    Changes</button>
+                <a href="clear_cart.php"
+                    class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4 ml-4">Clear
+                    Cart</a>
             </div>
         </form>
     </div>
