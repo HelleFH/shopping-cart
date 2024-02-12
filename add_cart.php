@@ -1,14 +1,27 @@
+
 <?php
-	session_start();
+session_start();
+//initialize cart if not set or is unset
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+}
 
-	//check if product is already in the cart
-	if(!in_array($_GET['id'], $_SESSION['cart'])){
-		array_push($_SESSION['cart'], $_GET['id']);
-		$_SESSION['message'] = 'Product added to cart';
-	}
-	else{
-		$_SESSION['message'] = 'Product already in cart';
-	}
+//unset quantity only when clearing the cart
+if (isset($_GET['clear_cart'])) {
+    unset($_SESSION['qty_array']);
+    // Redirect to prevent resubmission on page refresh
+    header('Location: index.php');
+    exit();
+}
 
-	header('location: index.php');
+// Check if product ID is provided and add it to the cart
+if (isset($_GET['id']) && !empty($_GET['id'])) {
+    $product_id = $_GET['id'];
+    // Add the product to the cart
+    $_SESSION['cart'][] = $product_id;
+    $_SESSION['message'] = 'Product added to cart successfully';
+    // Redirect to prevent resubmission on page refresh
+    header('Location: index.php');
+    exit();
+}
 ?>

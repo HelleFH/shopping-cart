@@ -5,14 +5,10 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 
-//unset quantity only when clearing the cart
-if (isset($_GET['clear_cart'])) {
+//unset quantity
+if (!isset($_SESSION['qty_array'])) {
     unset($_SESSION['qty_array']);
-    // Redirect to prevent resubmission on page refresh
-    header('Location: index.php');
-    exit();
-}
-?>
+}?>
 <!DOCTYPE html>
 <html>
 

@@ -1,5 +1,6 @@
 <?php
 session_start();
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Check if the form was submitted
     if(isset($_POST['save'])){
