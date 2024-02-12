@@ -165,7 +165,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     } else {
                         ?>
                         <tr>
-                            <td colspan="6" class="text-center border border-gray-400">No Item in Cart</td>
+                            <td colspan="6" class="text-center border border-gray-400">Your Cart is Empty</td>
                         </tr>
                         <?php
                     }
