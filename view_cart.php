@@ -10,7 +10,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['qty_array'][$key] = $_POST['qty_' . $key];
         }
         // Set a success message
-        $_SESSION['message'] = "Changes saved successfully.";
         // Redirect back to the cart page
         header('location: view_cart.php');
         exit; // Make sure to exit after redirecting
