@@ -103,11 +103,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     $total = 0;
                     if (!empty($_SESSION['cart'])) {
                         // Database connection parameters
-                        $host = 'ec2-52-54-200-216.compute-1.amazonaws.com';
-                        $database = 'dd6lav3cfgc4im';
-                        $user = 'fzqodqspncqlth';
-                        $password = '822f15786751cd2dcac0646c6fee43a50d56f215812fc9034ab77b9f9c7a4e4d';
-                        $port = '5432'; // PostgreSQL default port
+                        $host = 'ec2-44-206-204-65.compute-1.amazonaws.com';
+                        $database = 'dbjcuntl3p36f2';
+                        $user = 'xtetsieijhhedr';
+                        $password = '0ef7ae24c15a9f0547d54c6cae3e55b296f43cd44ba5adf74803955926418314';
+                        $port = '5432';
+
+
+
                     
                         try {
                             // Establishing the connection using PDO
