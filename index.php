@@ -37,13 +37,16 @@ session_start();
             <?php
             unset($_SESSION['message']);
         }
-        // Fetch our products
-        // Connection
-        $host = 'ec2-44-206-204-65.compute-1.amazonaws.com';
-        $database = 'dbjcuntl3p36f2';
-        $user = 'xtetsieijhhedr';
-        $password = '0ef7ae24c15a9f0547d54c6cae3e55b296f43cd44ba5adf74803955926418314';
-        $port = '5432';
+        $db = parse_url(getenv("DATABASE_URL"));
+
+        $pdo = new PDO("pgsql:" . sprintf(
+            "host=%s;port=%s;user=%s;password=%s;dbname=%s",
+            $db["host"],
+            $db["port"],
+            $db["user"],
+            $db["pass"],
+            ltrim($db["path"], "/")
+        ));
 
 
         postgres://xtetsieijhhedr:0ef7ae24c15a9f0547d54c6cae3e55b296f43cd44ba5adf74803955926418314@ec2-44-206-204-65.compute-1.amazonaws.com:5432/dbjcuntl3p36f2
