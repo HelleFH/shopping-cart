@@ -37,21 +37,18 @@ session_start();
             <?php
             unset($_SESSION['message']);
         }
-        $db = parse_url(getenv("DATABASE_URL"));
-
-        $pdo = new PDO("pgsql:" . sprintf(
-            "host=%s;port=%s;user=%s;password=%s;dbname=%s",
-            $db["host"],
-            $db["port"],
-            $db["user"],
-            $db["pass"],
-            ltrim($db["path"], "/")
-        ));
+        // Fetch our products
+        // Connection
+        $host = 'ec2-23-22-172-65.compute-1.amazonaws.com';
+        $database = 'dalq796sma21ev';
+        $user = 'brubuyhseaegrn';
+        $password = 'ab0eae51ebfc47bf38bd5c59c7564ed4a0fc9519c29ec1263ac1400deb4f5b2b';
+    
 
 
         postgres://xtetsieijhhedr:0ef7ae24c15a9f0547d54c6cae3e55b296f43cd44ba5adf74803955926418314@ec2-44-206-204-65.compute-1.amazonaws.com:5432/dbjcuntl3p36f2
         try {
-            $dsn = "pgsql:host=$host;port=$port;dbname=$database";
+            $dsn = "pgsql:host=$host;dbname=$database";
             $pdo = new PDO($dsn, $user, $password);
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
