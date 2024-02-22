@@ -81,7 +81,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
         ?>
 
-<a class="block mb-4 ml-4 text-black-600 hover:text-green-600" href="index.php">
+<a class="block mb-4 ml-4 text-black-600 hover:text-green-600" href="/index.php">
     <i class="fa fa-chevron-left mr-2" aria-hidden="true"></i> Back
 </a>
 
@@ -128,7 +128,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                                 ?>
                                 <tr>
                                     <td class="border border-gray-400">
-                                        <a href="delete_item.php?id=<?php echo $row['id']; ?>&index=<?php echo $index; ?>"><span><i
+                                        <a href="includes/delete_item.php?id=<?php echo $row['id']; ?>&index=<?php echo $index; ?>"><span><i
                                                     class="fa fa-trash" aria-hidden="true"></i>
                                             </span></a>
                                     </td>
@@ -152,8 +152,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                                     <td class="border border-gray-400">
-                                        £
-                                        <?php echo number_format($_SESSION['qty_array'][$index] * $row['price'], 2); ?>
+                                        £<?php echo number_format($_SESSION['qty_array'][$index] * $row['price'], 2); ?>
                                     </td>
                                     <?php $total += $_SESSION['qty_array'][$index] * $row['price']; ?>
                                 </tr>
@@ -187,7 +186,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" name="save"
                     class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4">Save
                     Changes</button>
-                <a href="clear_cart.php"
+                <a href="includes/clear_cart.php"
                     class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4 ml-4">Clear
                     Cart</a>
             </div>

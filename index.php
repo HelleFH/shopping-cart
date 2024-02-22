@@ -107,9 +107,9 @@ session_start();
                             <h4 class="font-semibold text-lg mb-2">
                                 <?php echo $row['name']; ?>
                             </h4>
-                            <p class="text-gray-600">$<?php echo $row['price']; ?></p>
+                            <p class="text-gray-600">£<?php echo $row['price']; ?></p>
                             <button class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 border border-gray-400 rounded shadow mt-4">
-                                <a href="add_cart.php?id=<?php echo $row['id']; ?>">Add to Cart</a>
+                            <a href="includes/add_cart.php?id=<?php echo $row['id']; ?>">Add to Cart</a>
                             </button>
                         </div>
                     </div>

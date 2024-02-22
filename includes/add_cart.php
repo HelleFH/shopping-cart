@@ -27,5 +27,5 @@ if (isset($_GET['id'])) {
 }
 
 // Redirect back to index.php after processing
-header('location: index.php');
+header('location: /index.php');
 ?>
