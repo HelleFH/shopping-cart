@@ -56,7 +56,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     </style>
     <div class="  w-screen">
-    <?php include 'nav.php'; ?>
+    <?php include 'includes/nav.php'; ?>
 
         <?php
         if (isset($_SESSION['message'])) {

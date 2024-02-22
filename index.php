@@ -16,7 +16,7 @@ session_start();
 
 <body>
     <div class="container mx-auto">
-    <?php include 'nav.php'; ?>
+    <?php include 'includes/nav.php'; ?>
 
         <?php
         // Info message
