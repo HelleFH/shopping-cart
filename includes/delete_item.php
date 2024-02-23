@@ -9,5 +9,5 @@
 	//rearrange array after unset
 	$_SESSION['qty_array'] = array_values($_SESSION['qty_array']);
 
-	header('location: view_cart.php');
+	header('location: /view_cart.php');
 ?>
