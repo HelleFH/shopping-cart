@@ -1,22 +1,14 @@
 <?php
 session_start();
-include 'db.php';
+include 'includes/db/db.php';
 ?>
 
-<!DOCTYPE html>
-<html>
-
-<head>
-    <meta charset="utf-8">
-    <title>Shopping Cart using Session in PHP</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-</head>
+<?php include 'includes/header.php'; ?>
 
 <body>
     <div class="container mx-auto">
         <?php include 'includes/nav.php'; ?>
-        <?php include 'message.php'; ?>
+        <?php include 'templates/message.php'; ?>
 
         <?php 
             $sql = "SELECT * FROM products";
@@ -26,39 +18,18 @@ include 'db.php';
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
                 
-                <?php include 'lightbox.php'; ?>
-                <?php include 'product.php'; ?>
+                <?php include 'templates/lightbox.php'; ?>
+                <?php include 'templates/product.php'; ?>
                 <?php
             }
-            echo '</div>'; // Close grid
+            echo '</div>'; 
       
         ?>
     </div>
 </body>
 
-<script>
-    // Set a timeout to hide the message after 3 seconds (adjust as needed)
-    setTimeout(function () {
-        var messageElement = document.getElementById("message");
-        if (messageElement) {
-            messageElement.style.display = "none";
-        }
-    }, 2000);
-</script>
-<script>
-    // Function to open the lightbox with the specified image URL
-    function openLightbox(imageUrl) {
-        document.getElementById('lightboxImg').src = imageUrl;
-        document.getElementById('lightbox').classList.remove('hidden');
-    }
+<script src="public/js/setTimeout.js"></script>
+<script src="public/js/lightbox.js"></script>
 
-    // Function to close the lightbox
-    function closeLightbox() {
-        document.getElementById('lightbox').classList.add('hidden');
-    }
-
-    // Add event listener to close button
-    document.getElementById('closeBtn').addEventListener('click', closeLightbox);
-</script>
 
 </html>

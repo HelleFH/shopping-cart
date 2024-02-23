@@ -3,7 +3,7 @@
                                 class="fa fa-trash" aria-hidden="true"></i>
                         </span></a>
                 </td>
-                <td class="border border-gray-400"><img src="<?php echo $row['photo']; ?>" alt="Product Image"
+                <td class="border border-gray-400"><img src="public/<?php echo $row['photo']; ?>" alt="Product Image"
                         class="w-16 h-16 object-cover"></td>
                 <td class="border border-gray-400">
                     <?php echo $row['name']; ?>

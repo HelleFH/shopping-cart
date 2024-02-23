@@ -2,7 +2,7 @@
 <div class="bg-white shadow-md rounded-lg overflow-hidden flex justify-center py-4 px-2">
                     <div class="w-full max-w-xs">
                         <a href="#" onclick="openLightbox('<?php echo $row['photo']; ?>')">
-                            <img src="<?php echo $row['photo']; ?>" class="w-full h-48 object-cover object-center">
+                            <img src="public/<?php echo $row['photo']; ?>" class="w-full h-48 object-cover object-center">
                         </a>
                         <div class="p-4 text-center">
                             <h4 class="font-semibold text-lg mb-2">

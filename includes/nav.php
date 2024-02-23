@@ -15,6 +15,3 @@
                 </ul>
             </div>
         </nav>
-        <style>.hover\:font-bold:hover {
-    font-weight: bold;
-}</style>
